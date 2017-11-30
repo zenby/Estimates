@@ -1,0 +1,161 @@
+﻿<Window x:Class="Estimates.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Estimates"
+        xmlns:VM="clr-namespace:Model.classes;assembly=Model"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="Building estimates" Height="700" Width="1000" MinHeight="200" MinWidth="200" 
+        Icon="E:\IIT\DB\WPF\Estimates\Estimates\images\icons8-Estimates-50.png"
+        DataContext="{Binding Source={StaticResource Locator},Path=Main}">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFF7FFA4" Offset="0.083"/>
+            <GradientStop Color="#FF3C874D" Offset="0.88"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="btnToolbarStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="Blue"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Margin" Value="1"></Setter>
+            <Setter Property="Background" Value="#FFF0DCDC"></Setter>
+            <Setter Property="BorderBrush" Value="#FFB9B3B9"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+        </Style>
+        <Style x:Key="btnStyleBuilding" TargetType="Button" BasedOn="{StaticResource btnToolbarStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedObject}" Value="3">
+                    <Setter Property="Background" Value="#FF9FE88C"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="btnStyleContract" TargetType="Button" BasedOn="{StaticResource btnToolbarStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedObject}" Value="2">
+                    <Setter Property="Background" Value="#FF9FE88C"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="btnStyleClient" TargetType="Button" BasedOn="{StaticResource btnToolbarStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedObject}" Value="1">
+                    <Setter Property="Background" Value="#FF9FE88C"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="109*" ></ColumnDefinition>
+            <ColumnDefinition Width="139*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Menu VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2">
+            <MenuItem Height="25" Header="Edit">
+                <MenuItem Header="Add Client" Command="{Binding AddClientCmd}"></MenuItem>
+                <MenuItem Header="Update Client" Command="{Binding UpdateClientCmd}"></MenuItem>
+                <MenuItem Header="Delete Client" Command="{Binding DeleteClientCmd}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Add Contract" Command="{Binding AddContractCmd}"></MenuItem>
+                <MenuItem Header="Edit Contract" Command="{Binding UpdateContractCmd}"></MenuItem>
+                <MenuItem Header="Delete Contract" Command="{Binding DeleteContractCmd}" ></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Add Building" Command="{Binding AddBuildingCmd}"></MenuItem>
+                <MenuItem Header="Edit Building" Command="{Binding UpdateBuildingCmd}"></MenuItem>
+                <MenuItem Header="Delete Building" Command="{Binding DeleteBuildingCmd}"></MenuItem>
+            </MenuItem>
+            <MenuItem Height="25" Header="About"></MenuItem>
+        </Menu>
+        <ToolBar Grid.Row="1" Height="auto" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource btnStyleClient}"  Command="{Binding AddClientCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ClientAdd.png"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleClient}"  Command="{Binding DeleteClientCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ClientDelete.ico"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleClient}"  Command="{Binding UpdateClientCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ClientUpdate.ico"></Image>
+            </Button>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+            <Button Style="{StaticResource btnStyleClient}"  Command="{Binding AddContractCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ContractAdd.ico"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleContract}"  Command="{Binding DeleteContractCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ContractDelete.ico"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleContract}"  Command="{Binding UpdateContractCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\ContractUpdate.ico"></Image>
+            </Button>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+            <Button Style="{StaticResource btnStyleContract}"  Command="{Binding AddBuildingCmd}" >
+                <Image Source="E:\IIT\DB\WPF\Estimates\Estimates\images\BuildingAdd.ico"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleBuilding}"  Command="{Binding DeleteBuildingCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\BuildingRemove.ico"></Image>
+            </Button>
+            <Button Style="{StaticResource btnStyleBuilding}"  Command="{Binding UpdateBuildingCmd}">
+                <Image  Source="E:\IIT\DB\WPF\Estimates\Estimates\images\BuildingUpdate.ico"></Image>
+            </Button>
+            <CheckBox x:Name="Expander" IsChecked="True" Background="#FF9FE88C" Height="30" BorderBrush="#FFB9B3B9" BorderThickness="2">
+                Свернуть/Развернуть
+            </CheckBox>
+            <Button Style="{StaticResource btnStyleContract}" Command="{Binding BuildingToXmlCmd}" >
+                <Image Source="E:\IIT\DB\WPF\Estimates\Estimates\images\icons8-source-code-filled.png"></Image>
+            </Button>
+        </ToolBar>
+        <StackPanel Grid.Row="2" Grid.Column="1" Height="Auto" >
+            <UserControl Content="{Binding DynamicUserControl}"></UserControl>
+            <UserControl VerticalAlignment="Bottom"  Content="{Binding ChartsUserControl}"></UserControl>
+        </StackPanel>
+
+        <TreeView x:Name="mainTreeView" ItemsSource="{Binding ListClient}" VerticalAlignment="Stretch" Grid.Row="2" >
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding ElementName=Expander, Path=IsChecked}" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction
+                            Command="{Binding SetSelectedItemCommand}"
+                        CommandParameter="{Binding SelectedItem, ElementName=mainTreeView}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Contract}" DataType="{x:Type VM:Client}">
+                    <Label Content="{Binding Organization}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Building}" DataType="{x:Type VM:Contract}">
+                            <Label Content="{Binding ContractNumber}"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate DataType="{x:Type VM:Building}">
+                                    <Label Content="{Binding NameOfTheObject}"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <StatusBar  Grid.Row="3" Height="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+            <StatusBarItem Content="{Binding DayOfTheWeek}"></StatusBarItem>
+            <StatusBarItem  
+                           HorizontalAlignment="Left" Content="{Binding Time}">
+            </StatusBarItem>
+
+        </StatusBar>
+
+    </Grid>
+</Window>

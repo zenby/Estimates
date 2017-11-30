@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Estimates.UserControlBuildings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Estimates"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="600"
+             Background="Azure"
+             DataContext="{Binding Source={StaticResource Locator},Path=Main}">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="187*"></ColumnDefinition>
+            <ColumnDefinition Width="393*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+
+            <Label Content="{Binding SelectedBuilding.ContractNumber}"></Label>
+            <Label Content="{Binding SelectedBuilding.NameOfTheObject}"></Label>
+            <Label Content="{Binding SelectedBuilding.InvNumber}"></Label>
+            <Label Content="{Binding SelectedBuilding.IssueDate}" ContentStringFormat="{}{0:d/M/yyyy}"></Label>
+            <Label Content="{Binding SelectedBuilding.Length}" ></Label>
+            <Label Content="{Binding SelectedBuilding.Width}"></Label>
+            <Label Content="{Binding SelectedBuilding.Height}"></Label>
+            <Label Content="{Binding SelectedBuilding.Amount}"></Label>
+            <Label Content="{Binding SelectedBuilding.IsCivil}"></Label>
+            <Label Content="{Binding SelectedBuilding.IsPreserved}"></Label>
+            <Label Content="{Binding SelectedBuilding.IsWhileConstruction}"></Label>
+            <Label Content="{Binding SelectedBuilding.IsMultistory}"></Label>
+            <Label Content="{Binding SelectedBuilding.StoreyHeight}"></Label>
+            <Label Content="{Binding SelectedBuilding.CostOfTheObject}"></Label>
+
+        </StackPanel>
+        <StackPanel Grid.Column="0">
+            <Label Content="Contract number:"></Label>
+            <Label Content="Name of the object:"></Label>
+            <Label Content="Inventory number:"></Label>
+            <Label Content="Issue date:"></Label>
+            <Label Content="Length:"></Label>
+            <Label Content="Width:"></Label>
+            <Label Content="Height:"></Label>
+            <Label Content="Amount:"></Label>
+            <Label Content="Civil:"></Label>
+            <Label Content="Preserved:"></Label>
+            <Label Content="While constucting:"></Label>
+            <Label Content="Multistory:"></Label>
+            <Label Content="Storey height:"></Label>
+            <Label Content="Overall cost of the object:"></Label>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

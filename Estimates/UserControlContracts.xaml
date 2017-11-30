@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Estimates.UserControlContracts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Estimates"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600"
+             DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+             Background="Azure">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"></ColumnDefinition>
+            <ColumnDefinition Width="47*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="{Binding SelectedContract.ContractNumber}"></Label>
+            <Label Content="{Binding SelectedContract.DateOfSignature}" ContentStringFormat="{}{0:d/M/yyyy}"></Label>
+
+        </StackPanel>
+        <StackPanel Grid.Column="0">
+            <Label Content="Contract Number:"></Label>
+            <Label Content="DateOfSignature:"></Label>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

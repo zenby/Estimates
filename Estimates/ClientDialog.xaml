@@ -1,0 +1,97 @@
+﻿<Window x:Class="Estimates.ClientDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Estimates"
+        xmlns:c="clr-namespace:Estimates.Validation"
+        mc:Ignorable="d"
+        Title="Client changes" Height="300" Width="400">
+
+    <Window.Resources>
+        <Style x:Key="CommonStyle" TargetType="FrameworkElement">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label"  BasedOn="{StaticResource CommonStyle}"></Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource CommonStyle}"></Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"></ColumnDefinition>
+            <ColumnDefinition Width="55*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <Label Style="{StaticResource LabelStyle}" Content="Название организации:" />
+            <Label Style="{StaticResource LabelStyle}" Content="Адрес:" />
+            <Label Style="{StaticResource LabelStyle}" Content="Индекс:"></Label>
+            <Label Style="{StaticResource LabelStyle}" Content="Телефон:"></Label>
+            <Label Style="{StaticResource LabelStyle}" Content="Факс:" ></Label>
+            <Label Style="{StaticResource LabelStyle}" Content="Расчетный счет:"></Label>
+
+            <Button x:Name="btnOk" Margin="20" Width="80" Click="btnOk_Click" Content="Ok"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+
+            <TextBox Style="{StaticResource TextBoxStyle}">
+                <TextBox.Text>
+                    <Binding Path="NewClient.Organization" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:StringValidation ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}">
+                <TextBox.Text>
+                    <Binding Path="NewClient.Adress" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:StringValidation ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" >
+                <TextBox.Text>
+                    <Binding Path="NewClient.PostIndex" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:IntValidation ValidatesOnTargetUpdated="True" Min="220000" Max="920200"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}">
+                <TextBox.Text>
+                    <Binding Path="NewClient.Telephone" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:StringValidation ValidatesOnTargetUpdated="True" Min="7"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}">
+                <TextBox.Text>
+                    <Binding Path="NewClient.Fax" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:StringValidation ValidatesOnTargetUpdated="True" Min="6"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}">
+                <TextBox.Text>
+                    <Binding Path="NewClient.BankAccount" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <c:StringValidation ValidatesOnTargetUpdated="True" Min="7"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Button x:Name="btnCancel" Margin="20" Width="80" Click="btnCancel_Click">Cancel</Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
